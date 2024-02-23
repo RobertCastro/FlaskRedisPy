@@ -58,4 +58,4 @@ api.add_resource(UserResource, '/api/v1/users')
 api.add_resource(PingResource, '/ping')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
