@@ -1,6 +1,7 @@
 from flask_restful import Api, Resource, reqparse
 from failures_with_user_registration_log import registrar_falla_en_registro
 from user_registration_service_principal import registrar_usuario_principal
+from failures_ping_service_log import registrar_ping_falla
 import datetime
 
 class UserResource(Resource):
@@ -24,6 +25,7 @@ class UserResource(Resource):
         except Exception as e:
             error_message = str(e)
             registrar_falla_en_registro.delay(error_message)
+            registrar_ping_falla.delay(error_message)
             return {
                 'status':'success', 
                 'message': ('Email received successfully. We are experiencing latencies '
